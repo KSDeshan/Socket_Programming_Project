@@ -1,18 +1,4 @@
-#!/usr/bin/env python3
-"""
-Threaded TCP chat + file-relay server (robust buffer handling).
 
-Protocol:
-- Text messages: newline-terminated UTF-8 lines (server prefixes them with "username: ").
-- File transfer:
-    Header (ASCII / UTF-8) begins with "__FILE__\n"
-    Then filename\n
-    Then filesize\n
-    Then a blank line (\n)
-    Then exactly `filesize` raw bytes (binary)
-
-The server relays file header + raw bytes unchanged to other clients.
-"""
 import socket
 import threading
 import argparse
@@ -24,7 +10,7 @@ MAX_FILE_SIZE = 50 * 1024 * 1024  # 50 MB
 FILE_MARKER = b'__FILE__\n'
 
 def broadcast(message_bytes, except_sock=None):
-    """Send message_bytes to all connected clients except except_sock."""
+    #Send message_bytes to all connected clients except except_sock.
     with clients_lock:
         dead = []
         for sock in list(clients.keys()):
@@ -43,7 +29,7 @@ def broadcast(message_bytes, except_sock=None):
                 del clients[s]
 
 def handle_client(conn, addr):
-    """Handle an individual client connection."""
+    #Handle an individual client connection
     with conn:
         try:
             conn.sendall(b'WELCOME: Please send your username followed by newline.\n')
@@ -203,6 +189,7 @@ def main():
         print("\nShutting down server.")
     finally:
         server.close()
+
 
 if __name__ == '__main__':
     main()
