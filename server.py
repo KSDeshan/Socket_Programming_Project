@@ -68,7 +68,7 @@ def handle_client(conn, addr):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--host', default='0.0.0.0')
-    parser.add_argument('--port', type=int, default=9090)
+    parser.add_argument('--port', type=int, default=5000)
     args = parser.parse_args()
 
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
