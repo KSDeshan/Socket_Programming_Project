@@ -1,9 +1,4 @@
-#!/usr/bin/env python3
-"""
-GUI Chat Client with file send/receive (binary streaming).
-Usage:
-    python3 gui_client.py
-"""
+
 import socket
 import threading
 import tkinter as tk
@@ -163,7 +158,7 @@ class ChatClient:
         self.name_entry.config(state=tk.NORMAL)
 
     def receive_loop(self):
-        """Receive data, handle both text lines and binary file transfers."""
+        ##Receive data, handle both text lines and binary file transfers.
         buffer = b''
         try:
             while self.connected:
